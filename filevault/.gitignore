@@ -31,3 +31,22 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Java & Spring Boot
+/target
+*.log
+*.class
+*.jar
+*.war
+*.iml
+/.idea
+*.db
+*.h2.db
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Credentials or secrets
+application.properties
+application.yml
