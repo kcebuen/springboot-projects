@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>User Dashboard</title></head>
+<body>
+<h2>User Dashboard</h2>
+<p>Welcome, regular user!</p>
+<form method="POST" action="/user/upload" enctype="multipart/form-data">
+    <input type="file" name="file" required />
+    <button type="submit">Upload</button>
+</form>
+
+<h3>Your Files</h3>
+<ul>
+    <li th:each="file : ${files}">
+        <a th:href="@{|/files/${file.id}|}" th:text="${file.fileName}"></a>
+        (<span th:text="${file.contentType}"></span>,
+        <span th:text="${#numbers.formatDecimal(file.fileSize / 1024, 0, 2)} + ' KB'"></span>)
+    </li>
+</ul>
+
+<a href="/logout">Logout</a>
+</body>
+</html>

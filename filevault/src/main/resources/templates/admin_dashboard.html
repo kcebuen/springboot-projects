@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Admin Dashboard</title></head>
+<body>
+<h2>Admin Dashboard</h2>
+<p>Welcome, admin!</p>
+
+<h3>All Uploaded Files</h3>
+<table border="1">
+    <tr>
+        <th>Filename</th>
+        <th>Type</th>
+        <th>Size (KB)</th>
+        <th>Uploaded By</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="file : ${files}">
+        <td><a th:href="@{|/files/${file.id}|}" th:text="${file.fileName}"></a></td>
+        <td th:text="${file.contentType}"></td>
+        <td th:text="${#numbers.formatDecimal(file.fileSize / 1024, 0, 2)}"></td>
+        <td th:text="${file.owner.username}"></td>
+        <td>
+            <form th:action="@{|/admin/delete/${file.id}|}" method="post">
+                <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<a href="/logout">Logout</a>
+</body>
+</html>
